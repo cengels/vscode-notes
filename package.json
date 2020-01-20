@@ -1,0 +1,25 @@
+{
+    "name": "vscode-notes",
+    "displayName": "VSCode Notes",
+    "description": "A custom .nt extension allowing list-based note highlighting",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "nt",
+            "aliases": ["Note", "nt"],
+            "extensions": [".nt",".note"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "nt",
+            "scopeName": "source.nt",
+            "path": "./syntaxes/nt.tmLanguage.json"
+        }]
+    }
+}
