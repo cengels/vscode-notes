@@ -1,32 +1,40 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Note",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.nt",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.nt",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.nt",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": "source.nt"
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Note",
+    "patterns": [
+        {
+            "include": "#tokens"
+        },
+        {
+            "include": "#headings"
+        },
+        {
+            "include": "#items"
+        }
+    ],
+    "repository": {
+        "headings": {
+            "name": "entity.name.section.nt",
+            "match": "^.*:$"
+        },
+        "items": {
+            "patterns": [{
+                "name": "support.type.property-name.nt",
+                "match": "^[^:]+:(?=\\B.*)"
+            }, {
+                "name": "meta.structure.dictionary.value.nt",
+                "match": "(?<=:).*$"
+            }]
+        },
+        "tokens": {
+            "patterns": [{
+                "name": "punctuation.definition.block.sequence.item.nt",
+                "match": "•"
+            },{
+                "name": "punctuation.separator.nt",
+                "match": ":"
+            }]
+        }
+    },
+    "scopeName": "source.nt"
 }
