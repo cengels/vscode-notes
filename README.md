@@ -1,6 +1,6 @@
 # vscode-notes README
 
-This extension adds the `.nt` or `.note` file type. This file type allows you to create list-based note items indexed by one of the common list denominators (including `-`, `*`, or even `•`). It is meant to be used by programmers or non-programmers alike and requires no knowledge of any programming language syntax.
+This extension adds the `.nt` or `.note` file type. This file type offers syntax highlighting for list-based note items indexed by one of the common list denominators (including `-`, `*`, or even `•`). It is meant to be used by programmers or non-programmers alike and requires no knowledge of any programming language syntax.
 
 ## Example
 
