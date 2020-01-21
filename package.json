@@ -2,6 +2,7 @@
     "name": "vscode-notes",
     "displayName": "VSCode Notes",
     "description": "A custom .nt extension allowing list-based note highlighting",
+    "publisher": "cengels",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.41.0"
@@ -18,7 +19,7 @@
         }],
         "grammars": [{
             "language": "nt",
-            "scopeName": "source.nt",
+            "scopeName": "text.note",
             "path": "./syntaxes/nt.tmLanguage.json"
         }]
     }
