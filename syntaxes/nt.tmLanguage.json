@@ -36,7 +36,14 @@
                         "name": "punctuation.separator.key-value.note"
                     },
                     "4": {
-                        "name": "meta.structure.dictionary.value.note"
+                        "name": "meta.structure.dictionary.value.note",
+                        "patterns": [{
+                            "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
+                            "captures": {
+                                "2": { "name": "punctuation.separator.dictionary.pair.note" },
+                                "3": { "name": "punctuation.separator.dictionary.pair.note" }
+                            }
+                        }]
                     }
                 }
             }]
