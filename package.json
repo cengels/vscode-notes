@@ -4,6 +4,10 @@
     "description": "A custom .nt extension allowing list-based note highlighting",
     "publisher": "cengels",
     "version": "0.0.2",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cengels/vscode-notes.git"
+    },
     "engines": {
         "vscode": "^1.41.0"
     },
