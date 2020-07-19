@@ -6,6 +6,9 @@
             "include": "#headings"
         },
         {
+            "include": "#namedItems"
+        },
+        {
             "include": "#items"
         },
         {
@@ -25,31 +28,57 @@
                 }
             }
         },
-        "items": {
+        "namedItems": {
             "patterns": [{
-                "match": "^\\s*(([•*\\-#\\.\\?])\\s[^:]+(:))\\s(.+$)",
+                "match": "^\\s*([•*\\-#\\.\\?])(\\s[^:]+(:))\\s(.+$)",
                 "captures": {
                     "1": {
-                        "name": "support.type.property-name.note",
-                        "patterns": [{ "include": "#italic" }, { "include": "#bold" }]
+                        "name": "punctuation.definition.block.sequence.item.note"
                     },
                     "2": {
-                        "name": "punctuation.definition.block.sequence.item.note"
+                        "name": "support.type.property-name.note",
+                        "patterns": [{ "include": "#italic" }, { "include": "#bold" }]
                     },
                     "3": {
                         "name": "punctuation.separator.key-value.note"
                     },
                     "4": {
                         "name": "meta.structure.dictionary.value.note",
-                        "patterns": [{
-                            "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
-                            "captures": {
-                                "2": { "name": "punctuation.separator.dictionary.pair.note" },
-                                "3": { "name": "punctuation.separator.dictionary.pair.note" }
-                            }
-                        },
-                        { "include": "#italic" },
-                        { "include": "#bold" }]
+                        "patterns": [
+                            {
+                                "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
+                                "captures": {
+                                    "2": { "name": "punctuation.separator.dictionary.pair.note" },
+                                    "3": { "name": "punctuation.separator.dictionary.pair.note" }
+                                }
+                            },
+                            { "include": "#italic" },
+                            { "include": "#bold" }
+                        ]
+                    }
+                }
+            }]
+        },
+        "items": {
+            "patterns": [{
+                "match": "^\\s*([•*\\-#\\.\\?])\\s(.+$)",
+                "captures": {
+                    "1": {
+                        "name": "punctuation.definition.block.sequence.item.note"
+                    },
+                    "2": {
+                        "name": "meta.structure.list.value.note",
+                        "patterns": [
+                            {
+                                "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
+                                "captures": {
+                                    "2": { "name": "punctuation.separator.list.pair.note" },
+                                    "3": { "name": "punctuation.separator.list.pair.note" }
+                                }
+                            },
+                            { "include": "#italic" },
+                            { "include": "#bold" }
+                        ]
                     }
                 }
             }]
