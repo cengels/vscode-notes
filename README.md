@@ -15,7 +15,7 @@ Headline:
 
 ## Markdown
 
-The note file type supports limited markdown (specifically, bold and italic) via either the asterisk or underscore notation (`**bold**` or `__bold__` and `*italic*` or `__italic__`). However, to make these work, an additional step is necessary.
+The note file type supports limited markdown (specifically, bold and italic) via either the asterisk or underscore notation (`**bold**` or `__bold__` and `*italic*` or `_italic_`). However, to make these work, an additional step is necessary.
 
 Open your VSCode's `settings.json` and add the following:
 
