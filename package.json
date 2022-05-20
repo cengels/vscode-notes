@@ -3,7 +3,10 @@
     "displayName": "VSCode Notes",
     "description": "A custom .nt extension allowing list-based note highlighting",
     "publisher": "cengels",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "scripts": {
+        "package": "vsce package"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/cengels/vscode-notes.git"
@@ -18,7 +21,7 @@
         "languages": [{
             "id": "nt",
             "aliases": ["Note", "nt"],
-            "extensions": [".nt",".note"],
+            "extensions": [".nt", ".note"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
