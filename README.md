@@ -29,7 +29,7 @@ Open your VSCode's `settings.json` and add the following:
                 }
             },
             {
-                "scope": ["formatting.bold"],
+                "scope": ["formatting.bold", "meta.structure.list.value.bold"],
                 "settings": {
                     "fontStyle": "bold"
                 }
