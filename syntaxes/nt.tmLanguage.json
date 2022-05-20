@@ -73,14 +73,14 @@
                         "name": "punctuation.definition.block.sequence.item.named.bold.note"
                     },
                     "2": {
-                        "name": "support.type.property-name.note",
+                        "name": "support.type.property-name.bold.note",
                         "patterns": [{ "include": "#italic" }, { "include": "#bold" }]
                     },
                     "3": {
-                        "name": "punctuation.separator.key-value.note"
+                        "name": "punctuation.separator.key-value.bold.note"
                     },
                     "4": {
-                        "name": "meta.structure.dictionary.value.note",
+                        "name": "meta.structure.dictionary.value.bold.note",
                         "patterns": [
                             {
                                 "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
