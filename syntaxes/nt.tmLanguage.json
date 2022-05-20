@@ -9,7 +9,13 @@
             "include": "#namedItems"
         },
         {
+            "include": "#namedBoldItems"
+        },
+        {
             "include": "#items"
+        },
+        {
+            "include": "#boldItems"
         },
         {
             "include": "#bold"
@@ -30,10 +36,41 @@
         },
         "namedItems": {
             "patterns": [{
-                "match": "^\\s*([•*\\-#\\.\\?])(\\s[^:]+(:))\\s(.+$)",
+                "match": "^\\s*([•*⋗\\-.?])(\\s[^:]+(:))\\s(.+$)",
                 "captures": {
                     "1": {
-                        "name": "punctuation.definition.block.sequence.item.note"
+                        "name": "punctuation.definition.block.sequence.item.named.note"
+                    },
+                    "2": {
+                        "name": "support.type.property-name.note",
+                        "patterns": [{ "include": "#italic" }, { "include": "#bold" }]
+                    },
+                    "3": {
+                        "name": "punctuation.separator.key-value.note"
+                    },
+                    "4": {
+                        "name": "meta.structure.dictionary.value.note",
+                        "patterns": [
+                            {
+                                "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
+                                "captures": {
+                                    "2": { "name": "punctuation.separator.dictionary.pair.note" },
+                                    "3": { "name": "punctuation.separator.dictionary.pair.note" }
+                                }
+                            },
+                            { "include": "#italic" },
+                            { "include": "#bold" }
+                        ]
+                    }
+                }
+            }]
+        },
+        "namedBoldItems": {
+            "patterns": [{
+                "match": "^\\s*([⫸!#])(\\s[^:]+(:))\\s(.+$)",
+                "captures": {
+                    "1": {
+                        "name": "punctuation.definition.block.sequence.item.named.bold.note"
                     },
                     "2": {
                         "name": "support.type.property-name.note",
@@ -61,7 +98,7 @@
         },
         "items": {
             "patterns": [{
-                "match": "^\\s*([•*\\-#\\.\\?])\\s(.+$)",
+                "match": "^\\s*([•*⋗\\-.?])\\s(.+$)",
                 "captures": {
                     "1": {
                         "name": "punctuation.definition.block.sequence.item.note"
@@ -83,35 +120,51 @@
                 }
             }]
         },
-        "bold": {
+        "boldItems": {
             "patterns": [{
-                "match": "([*]{2}(\\S(.*?\\S)?)\\*{2}|_{2}(\\S(.*?\\S)?)_{2})",
+                "match": "^\\s*([⫸!#])\\s(.+$)",
                 "captures": {
-                    "3": {
-                        "name": "formatting.bold.note",
-                        "patterns": [{ "include": "#italic" }]
+                    "1": {
+                        "name": "punctuation.definition.block.sequence.item.bold.note"
                     },
-                    "5": {
-                        "name": "formatting.bold.note",
-                        "patterns": [{ "include": "#italic" }]
+                    "2": {
+                        "name": "meta.structure.list.value.bold.note",
+                        "patterns": [
+                            {
+                                "match": "(\\s([•*\\-#]?)|(\\b[,;]?))\\s",
+                                "captures": {
+                                    "2": { "name": "punctuation.separator.list.pair.note" },
+                                    "3": { "name": "punctuation.separator.list.pair.note" }
+                                }
+                            },
+                            { "include": "#italic" },
+                            { "include": "#bold" }
+                        ]
                     }
                 }
             }]
         },
-        "italic": {
-            "patterns": [{
-                "match": "((?<![*])[*]([^*]*?)[*](?![*])|(?<!_)_([^_]*?)_(?!_))",
-                "captures": {
-                    "2": {
-                        "name": "formatting.italic.note",
-                        "patterns": [{ "include": "#bold" }]
-                    },
-                    "3": {
-                        "name": "formatting.italic.note",
-                        "patterns": [{ "include": "#bold" }]
-                    }
+        "bold": {
+            "begin": "(?x) (?<open>(\\*\\*(?=\\w)|(?<!\\w)\\*\\*|(?<!\\w)\\b__))(?=\\S) (?=\n  (\n    <[^>]*+>              # HTML tags\n    | (?<raw>`+)([^`]|(?!(?<!`)\\k<raw>(?!`))`)*+\\k<raw>\n                      # Raw\n    | \\\\[\\\\`*_{}\\[\\]()#.!+\\->]?+      # Escapes\n    | \\[\n    (\n        (?<square>          # Named group\n          [^\\[\\]\\\\]        # Match most chars\n          | \\\\.            # Escaped chars\n          | \\[ \\g<square>*+ \\]    # Nested brackets\n        )*+\n      \\]\n      (\n        (              # Reference Link\n          [ ]?          # Optional space\n          \\[[^\\]]*+\\]        # Ref name\n        )\n        | (              # Inline Link\n          \\(            # Opening paren\n            [ \\t]*+        # Optional whitespace\n            <?(.*?)>?      # URL\n            [ \\t]*+        # Optional whitespace\n            (          # Optional Title\n              (?<title>['\"])\n              (.*?)\n              \\k<title>\n            )?\n          \\)\n        )\n      )\n    )\n    | (?!(?<=\\S)\\k<open>).            # Everything besides\n                      # style closer\n  )++\n  (?<=\\S)(?=__\\b|\\*\\*)\\k<open>                # Close\n)\n",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.bold.note"
                 }
-            }]
+            },
+            "end": "(?<=\\S)(\\1)",
+            "name": "formatting.bold.note",
+            "patterns": [{ "include": "#italic" }]
+        },
+        "italic": {
+            "begin": "(?x) (?<open>(\\*(?=\\w)|(?<!\\w)\\*|(?<!\\w)\\b_))(?=\\S)                # Open\n  (?=\n    (\n      <[^>]*+>              # HTML tags\n      | (?<raw>`+)([^`]|(?!(?<!`)\\k<raw>(?!`))`)*+\\k<raw>\n                        # Raw\n      | \\\\[\\\\`*_{}\\[\\]()#.!+\\->]?+      # Escapes\n      | \\[\n      (\n          (?<square>          # Named group\n            [^\\[\\]\\\\]        # Match most chars\n            | \\\\.            # Escaped chars\n            | \\[ \\g<square>*+ \\]    # Nested brackets\n          )*+\n        \\]\n        (\n          (              # Reference Link\n            [ ]?          # Optional space\n            \\[[^\\]]*+\\]        # Ref name\n          )\n          | (              # Inline Link\n            \\(            # Opening paren\n              [ \\t]*+        # Optional whtiespace\n              <?(.*?)>?      # URL\n              [ \\t]*+        # Optional whtiespace\n              (          # Optional Title\n                (?<title>['\"])\n                (.*?)\n                \\k<title>\n              )?\n            \\)\n          )\n        )\n      )\n      | \\k<open>\\k<open>                   # Must be bold closer\n      | (?!(?<=\\S)\\k<open>).            # Everything besides\n                        # style closer\n    )++\n    (?<=\\S)(?=_\\b|\\*)\\k<open>                # Close\n  )\n",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.italic.note"
+                }
+            },
+            "end": "(?<=\\S)(\\1)((?!\\1)|(?=\\1\\1))",
+            "name": "formatting.italic.note",
+            "patterns": [{ "include": "#bold" }]
         }
     },
     "scopeName": "text.note"
